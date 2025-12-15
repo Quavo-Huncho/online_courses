@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "../../../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -59,9 +59,9 @@ export default function LessonPage() {
             <p>{lesson.lesson_content}</p>
 
             {/* Go to lesson details */}
-            <Link href={`/courses/${id}/${lesson.id}`}>
-              View Lesson
-            </Link>
+            <Link href={`/courses/${id}/${lessonId}/${lesson.id}`}>
+              View Questions
+             </Link> 
           </li>
         ))}
       </ul>
