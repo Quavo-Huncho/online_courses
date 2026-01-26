@@ -3,10 +3,14 @@
 import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useAuthGuard } from "@/lib/useAuthGuard";
 
 export default function LessonPage() {
-  const { id, lessonId } = useParams(); 
+  useAuthGuard();
+  const { id, lessonId } = useParams();
+  const router = useRouter();
+
   // id = courseId
   // lessonId = subcourseId
 
@@ -15,34 +19,47 @@ export default function LessonPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSubCourseTitle = async () => {
-      const { data, error } = await supabase
-        .from("sub_courses")
-        .select("title")
-        .eq("id", lessonId)  // FIXED
-        .single();
+    const checkAuthAndFetchData = async () => {
+      // 🔐 1️⃣ AUTH CHECK
+      const { data: userData } = await supabase.auth.getUser();
 
-      if (data) {
-        setSubCourseTitle(data.title);
+      if (!userData.user) {
+        router.push("/login");
+        return;
       }
-    };
 
-    const fetchLessons = async () => {
-      const { data, error } = await supabase
-        .from("lessons")
-        .select("*")
-        .eq("subcourse_id", lessonId); // FIXED
+      // 📘 2️⃣ FETCH SUB-COURSE TITLE
+      const { data: titleData, error: titleError } =
+        await supabase
+          .from("sub_courses")
+          .select("title")
+          .eq("id", lessonId)
+          .single();
 
-      if (data) {
-        setLessons(data);
+      if (titleError) {
+        console.error("Error fetching sub-course title:", titleError);
+      } else {
+        setSubCourseTitle(titleData.title);
+      }
+
+      // 📚 3️⃣ FETCH LESSONS
+      const { data: lessonsData, error: lessonsError } =
+        await supabase
+          .from("lessons")
+          .select("*")
+          .eq("subcourse_id", lessonId);
+
+      if (lessonsError) {
+        console.error("Error fetching lessons:", lessonsError);
+      } else {
+        setLessons(lessonsData);
       }
 
       setLoading(false);
     };
 
-    fetchSubCourseTitle();
-    fetchLessons();
-  }, [id, lessonId]); // FIXED
+    checkAuthAndFetchData();
+  }, [id, lessonId, router]);
 
   if (loading) return <div>Loading...</div>;
 
@@ -58,10 +75,9 @@ export default function LessonPage() {
             <h3>{lesson.lesson_title}</h3>
             <p>{lesson.lesson_content}</p>
 
-            {/* Go to lesson details */}
             <Link href={`/courses/${id}/${lessonId}/${lesson.id}`}>
               View Questions
-             </Link> 
+            </Link>
           </li>
         ))}
       </ul>

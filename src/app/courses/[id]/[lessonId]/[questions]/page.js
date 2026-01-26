@@ -1,45 +1,63 @@
 "use client";
+
 import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuthGuard } from "@/lib/useAuthGuard";
 
 export default function QuestionsPage() {
+  useAuthGuard();
   const { id, questions, lessonId } = useParams();
+  const router = useRouter();
+
   const [questionss, setQuestionss] = useState([]);
   const [courseTitle, setCourseTitle] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  // Fetch course title
-  const fetchCourseTitle = async () => {
-    const { data, error } = await supabase
-      .from("courses")
-      .select("title")
-      .eq("id", id)
-      .single();
-    if (error) console.error(error);
-    if (data) setCourseTitle(data.title);
-  };
-
-  // Fetch questions
-  const fetchQuestions = async () => {
-    const { data, error } = await supabase
-      .from("lesson_questions")
-      .select("*")
-      .eq("lesson_id", questions); // make sure lessonId is correct
-    if (error) console.error(error);
-    if (data) setQuestionss(data);
-    setLoading(false);
-  };
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetchCourseTitle();
-    fetchQuestions();
-  }, [id, questions]);
+    const checkAuthAndFetchData = async () => {
+      // 🔐 1️⃣ AUTH CHECK
+      const { data: userData } = await supabase.auth.getUser();
 
-  // Calculate score dynamically
+      if (!userData.user) {
+        router.push("/login");
+        return;
+      }
+
+      setUser(userData.user);
+
+      // 📘 2️⃣ FETCH COURSE TITLE
+      const { data: courseData, error: courseError } =
+        await supabase
+          .from("courses")
+          .select("title")
+          .eq("id", id)
+          .single();
+
+      if (courseError) console.error(courseError);
+      if (courseData) setCourseTitle(courseData.title);
+
+      // ❓ 3️⃣ FETCH QUESTIONS
+      const { data: questionsData, error: questionsError } =
+        await supabase
+          .from("lesson_questions")
+          .select("*")
+          .eq("lesson_id", questions);
+
+      if (questionsError) console.error(questionsError);
+      if (questionsData) setQuestionss(questionsData);
+
+      setLoading(false);
+    };
+
+    checkAuthAndFetchData();
+  }, [id, questions, router]);
+
+  // 🧮 CALCULATE SCORE
   const score = questionss.reduce((total, question) => {
     if (selectedAnswer[question.id] === question.correct_answers) {
       return total + 1;
@@ -47,20 +65,15 @@ export default function QuestionsPage() {
     return total;
   }, 0);
 
-  // Save score to Supabase
+  // 💾 SAVE SCORE (WITH USER)
   const saveScore = async () => {
     const totalQuestions = questionss.length;
 
-    console.log({
-      lesson_id: questions,
-      score,
-      total: totalQuestions,
-    });
-
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("lesson_results")
       .insert([
         {
+          user_id: user.id,
           lesson_id: questions,
           score,
           total: totalQuestions,
@@ -69,8 +82,6 @@ export default function QuestionsPage() {
 
     if (error) {
       console.error("Error saving score:", error);
-    } else {
-      console.log("Score saved successfully:", data);
     }
   };
 
@@ -102,8 +113,7 @@ export default function QuestionsPage() {
                             [question.id]: value,
                           }))
                         }
-                        disabled={submitted} // lock after submit
-                        style={{ cursor: "pointer" }}
+                        disabled={submitted}
                       />
                       {key}. {value}
                     </label>
@@ -112,7 +122,6 @@ export default function QuestionsPage() {
               })}
             </ul>
 
-            {/* Show feedback only after submit */}
             {submitted && (
               <p>
                 {selectedAnswer[question.id] === question.correct_answers
@@ -126,8 +135,8 @@ export default function QuestionsPage() {
 
       <button
         onClick={() => {
-          setSubmitted(true); // show feedback
-          saveScore(); // save to Supabase
+          setSubmitted(true);
+          saveScore();
         }}
         style={{ marginTop: "20px" }}
       >
@@ -144,7 +153,10 @@ export default function QuestionsPage() {
         </>
       )}
 
-      <Link href={`/courses/${id}/${questions}`} style={{ display: "block", marginTop: "20px" }}>
+      <Link
+        href={`/courses/${id}/${questions}`}
+        style={{ display: "block", marginTop: "20px" }}
+      >
         Back to Lesson
       </Link>
     </div>
