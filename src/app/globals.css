@@ -1,40 +1,125 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
-/* Reset and box-sizing */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Custom dark theme styles */
+:root {
+  --bs-dark: #0a0a0a;
+  --bs-dark-rgb: 10, 10, 10;
+  --bs-body-bg: var(--bs-dark);
+  --bs-body-color: #ededed;
+  --bs-emphasis-color: #ffffff;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bs-dark) !important;
+  color: #ffffff !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Links inherit color and remove underline */
+/* Custom navbar styling */
+.navbar-dark {
+  background-color: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Custom card styling for dark theme */
+.card {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px);
+}
+
+.card-body {
+  color: #ffffff !important;
+}
+
+.card-title {
+  color: #ffffff !important;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Custom button styles */
+.btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.btn-outline-primary {
+  border-color: #0d6efd !important;
+  color: #0d6efd !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+/* Custom form styling */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: #0d6efd !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Links styling */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Optional: custom CSS variables (can use in components) */
-:root {
-  --background-light: #ffffff;
-  --foreground-light: #171717;
-  --background-dark: #0a0a0a;
-  --foreground-dark: #ededed;
+a:hover {
+  color: #0d6efd !important;
 }
 
-/* Dark mode support via prefers-color-scheme */
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Custom footer styling */
+.footer {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Hero section styling */
+.hero-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Course card hover effects */
+.course-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #0d6efd;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

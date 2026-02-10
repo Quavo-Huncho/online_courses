@@ -10,56 +10,158 @@ export default function Footer() {
     <motion.footer
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-black/40 backdrop-blur-lg mt-16"
+      className="footer text-white mt-5"
     >
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-gray-300">
-
+      <div className="container py-5">
+        <div className="row g-4">
           {/* Brand */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">
-              Online Learning Platform
-            </h3>
-            <p className="text-sm leading-relaxed">
+          <div className="col-lg-4 col-md-6">
+            <h5 className="fw-bold mb-4">
+              <i className="bi bi-mortarboard me-2"></i>
+              LearnHub
+            </h5>
+            <p className="text-muted">
               Learn programming, web development, and real-world tech skills
               with structured courses and guided lessons.
             </p>
+            <div className="d-flex gap-3 mt-3">
+              <a href="#" className="text-muted">
+                <i className="bi bi-facebook fs-5"></i>
+              </a>
+              <a href="#" className="text-muted">
+                <i className="bi bi-twitter fs-5"></i>
+              </a>
+              <a href="#" className="text-muted">
+                <i className="bi bi-linkedin fs-5"></i>
+              </a>
+              <a href="#" className="text-muted">
+                <i className="bi bi-instagram fs-5"></i>
+              </a>
+            </div>
           </div>
 
           {/* Platform */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Platform</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/courses" className="hover:text-white">Courses</Link></li>
-              <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
-              <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+          <div className="col-lg-2 col-md-6">
+            <h6 className="text-uppercase fw-bold mb-4">Platform</h6>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link href="/courses" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Courses
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/pricing" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Pricing
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/about" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  About Us
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/contact" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Account */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Account</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/login" className="hover:text-white">Login</Link></li>
-              <li><Link href="/signup" className="hover:text-white">Sign Up</Link></li>
-              <li><Link href="/dashboard" className="hover:text-white">Dashboard</Link></li>
+          <div className="col-lg-2 col-md-6">
+            <h6 className="text-uppercase fw-bold mb-4">Account</h6>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link href="/login" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Login
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/sign-up" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Sign Up
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/dashboard" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Dashboard
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/profile" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Profile
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Legal */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
+          <div className="col-lg-2 col-md-6">
+            <h6 className="text-uppercase fw-bold mb-4">Legal</h6>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link href="/privacy-policy" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Privacy Policy
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/terms" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Terms of Service
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/refund" className="text-muted text-decoration-none">
+                  <i className="bi bi-chevron-right me-1"></i>
+                  Refund Policy
+                </Link>
+              </li>
             </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div className="col-lg-2 col-md-6">
+            <h6 className="text-uppercase fw-bold mb-4">Newsletter</h6>
+            <p className="text-muted small mb-3">
+              Subscribe to get updates on new courses and offers
+            </p>
+            <div className="input-group">
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Your email"
+                aria-label="Your email"
+              />
+              <button className="btn btn-primary" type="button">
+                <i className="bi bi-send"></i>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm text-gray-400">
-          © {currentYear} Online Learning Platform. All rights reserved.
+        <hr className="border-secondary my-4" />
+
+        {/* Bottom row */}
+        <div className="row align-items-center">
+          <div className="col-md-6">
+            <p className="text-muted small mb-0">
+              © {currentYear} LearnHub. All rights reserved.
+            </p>
+          </div>
+          <div className="col-md-6 text-md-end">
+            <p className="text-muted small mb-0">
+              Made with <i className="bi bi-heart-fill text-danger"></i> for learners
+            </p>
+          </div>
         </div>
       </div>
     </motion.footer>
