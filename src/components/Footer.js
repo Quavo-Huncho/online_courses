@@ -20,21 +20,21 @@ export default function Footer() {
               <i className="bi bi-mortarboard me-2"></i>
               LearnHub
             </h5>
-            <p className="text-muted">
+            <p className="text-white-50 small">
               Learn programming, web development, and real-world tech skills
               with structured courses and guided lessons.
             </p>
             <div className="d-flex gap-3 mt-3">
-              <a href="#" className="text-muted">
+              <a href="#" className="text-green">
                 <i className="bi bi-facebook fs-5"></i>
               </a>
-              <a href="#" className="text-muted">
+              <a href="#" className="text-green">
                 <i className="bi bi-twitter fs-5"></i>
               </a>
-              <a href="#" className="text-muted">
+              <a href="#" className="text-green">
                 <i className="bi bi-linkedin fs-5"></i>
               </a>
-              <a href="#" className="text-muted">
+              <a href="#" className="text-green">
                 <i className="bi bi-instagram fs-5"></i>
               </a>
             </div>
@@ -45,25 +45,25 @@ export default function Footer() {
             <h6 className="text-uppercase fw-bold mb-4">Platform</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link href="/courses" className="text-muted text-decoration-none">
+                <Link href="/courses" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Courses
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/pricing" className="text-muted text-decoration-none">
+                <Link href="/pricing" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Pricing
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/about" className="text-muted text-decoration-none">
+                <Link href="/about" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   About Us
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/contact" className="text-muted text-decoration-none">
+                <Link href="/contact" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Contact
                 </Link>
@@ -76,25 +76,25 @@ export default function Footer() {
             <h6 className="text-uppercase fw-bold mb-4">Account</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link href="/login" className="text-muted text-decoration-none">
+                <Link href="/login" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Login
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/sign-up" className="text-muted text-decoration-none">
+                <Link href="/sign-up" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Sign Up
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/dashboard" className="text-muted text-decoration-none">
+                <Link href="/dashboard" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Dashboard
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/profile" className="text-muted text-decoration-none">
+                <Link href="/profile" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Profile
                 </Link>
@@ -107,19 +107,19 @@ export default function Footer() {
             <h6 className="text-uppercase fw-bold mb-4">Legal</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link href="/privacy-policy" className="text-muted text-decoration-none">
+                <Link href="/privacy-policy" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Privacy Policy
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/terms" className="text-muted text-decoration-none">
+                <Link href="/terms" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Terms of Service
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/refund" className="text-muted text-decoration-none">
+                <Link href="/refund" className="text-muted text-decoration-none text-white-50 small">
                   <i className="bi bi-chevron-right me-1"></i>
                   Refund Policy
                 </Link>
@@ -130,7 +130,7 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="col-lg-2 col-md-6">
             <h6 className="text-uppercase fw-bold mb-4">Newsletter</h6>
-            <p className="text-muted small mb-3">
+            <p className="text-muted small mb-3 text-white-50 small">
               Subscribe to get updates on new courses and offers
             </p>
             <div className="input-group">
@@ -153,12 +153,12 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="row align-items-center">
           <div className="col-md-6">
-            <p className="text-muted small mb-0">
+            <p className="text-muted small mb-0 text-white-50 small">
               © {currentYear} LearnHub. All rights reserved.
             </p>
           </div>
           <div className="col-md-6 text-md-end">
-            <p className="text-muted small mb-0">
+            <p className="text-muted small mb-0 text-white-50 small">
               Made with <i className="bi bi-heart-fill text-danger"></i> for learners
             </p>
           </div>
